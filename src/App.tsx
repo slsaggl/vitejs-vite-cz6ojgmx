@@ -25,7 +25,7 @@ const initialData: RecordItem[] = [
   {
     date: '2026-04-18',
     condition: '보통',
-    morningTask: '저녁 약속',
+    morningTask: '저녁 운동하기',
     habits: {
       water: true,
       fruit: true,
@@ -36,12 +36,12 @@ const initialData: RecordItem[] = [
     mealMemo: '아침 과일, 점심 일반식, 저녁 가볍게',
     exerciseMemo: '산책 30분',
     weight: '',
-    note: '무난한 하루!',
+    note: '무난한 하루',
   },
   {
     date: '2026-04-19',
     condition: '좋음',
-    morningTask: '저녁 운동 예정',
+    morningTask: '회식 과식 주의',
     habits: {
       water: true,
       fruit: true,
@@ -224,10 +224,10 @@ export default function App() {
           }}
         >
           <h1 style={{ fontSize: '32px', marginBottom: '8px' }}>
-            몸 데이터 관리 시스템 v1
+            오늘의 몸 관리
           </h1>
           <p style={{ color: '#64748b', marginBottom: '24px' }}>
-            하루 상태, 습관, 식단, 운동을 한 화면에서 기록
+            컨디션, 습관, 식단, 운동을 간단하게 기록해요
           </p>
 
           <div
@@ -249,7 +249,7 @@ export default function App() {
             </div>
 
             <div>
-              <label>몸상태</label>
+              <label>오늘 컨디션</label>
               <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
                 {['좋음', '보통', '나쁨'].map((state) => (
                   <button
@@ -270,13 +270,13 @@ export default function App() {
           </div>
 
           <div style={{ marginBottom: '16px' }}>
-            <label>아침 1과업</label>
+            <label>오늘 한 줄 목표</label>
             <input
               value={form.morningTask}
               onChange={(e) =>
                 setForm({ ...form, morningTask: e.target.value })
               }
-              placeholder="예: 저녁 운동 예정, 회식 조심"
+              placeholder="예: 저녁 운동하기, 회식 과식 주의"
               style={inputStyle}
             />
           </div>
@@ -289,7 +289,7 @@ export default function App() {
                 marginBottom: '8px',
               }}
             >
-              <label>오늘 습관 체크</label>
+              <label>오늘 실천한 루틴</label>
               <strong>
                 {score}점 / {maxScore}점
               </strong>
@@ -364,7 +364,7 @@ export default function App() {
             }}
           >
             <div>
-              <label>식단 메모</label>
+              <label>먹은 것 기록</label>
               <textarea
                 value={form.mealMemo}
                 onChange={(e) => setForm({ ...form, mealMemo: e.target.value })}
@@ -372,7 +372,7 @@ export default function App() {
               />
             </div>
             <div>
-              <label>운동 메모</label>
+              <label>운동 기록</label>
               <textarea
                 value={form.exerciseMemo}
                 onChange={(e) =>
@@ -401,7 +401,7 @@ export default function App() {
               />
             </div>
             <div>
-              <label>하루 메모</label>
+              <label>하루 한 줄 기록</label>
               <input
                 value={form.note}
                 onChange={(e) => setForm({ ...form, note: e.target.value })}
@@ -475,7 +475,7 @@ export default function App() {
               boxShadow: '0 8px 30px rgba(0,0,0,0.06)',
             }}
           >
-            <h2 style={{ marginBottom: '16px' }}>최근 기록</h2>
+            <h2 style={{ marginBottom: '16px' }}>최근 저장 기록</h2>
             <div
               style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}
             >
