@@ -179,6 +179,10 @@ export default function App() {
     }
   };
 
+  const selectRecord = (record: RecordItem) => {
+    setForm(record);
+  };
+
   const resetToday = () => {
     setForm({
       date: today,
@@ -220,7 +224,7 @@ export default function App() {
           }}
         >
           <h1 style={{ fontSize: '32px', marginBottom: '8px' }}>
-            몸 데이터 관리 시스템
+            몸 데이터 관리 시스템 v1
           </h1>
           <p style={{ color: '#64748b', marginBottom: '24px' }}>
             하루 상태, 습관, 식단, 운동을 한 화면에서 기록
