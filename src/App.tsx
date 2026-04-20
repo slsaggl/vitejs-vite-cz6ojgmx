@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type CSSProperties } from 'react';
 
 type HabitKey = 'water' | 'fruit' | 'exercise' | 'sleep' | 'stretch';
 
@@ -85,12 +85,6 @@ function getConditionColor(condition: string) {
 export default function App() {
   const today = new Date().toISOString().slice(0, 10);
 
-  const [records, setRecords] = useState<RecordItem[]>(
-    [...initialData].sort((a, b) => (a.date < b.date ? 1 : -1))
-  );
-
-  const existingToday = records.find((r) => r.date === today);
-
   const emptyHabits: Record<HabitKey, boolean> = {
     water: false,
     fruit: false,
@@ -99,12 +93,18 @@ export default function App() {
     stretch: false,
   };
 
+  const [records, setRecords] = useState<RecordItem[]>(
+    [...initialData].sort((a, b) => (a.date < b.date ? 1 : -1))
+  );
+
+  const existingToday = records.find((r) => r.date === today);
+
   const [form, setForm] = useState<RecordItem>(
     existingToday || {
       date: today,
       condition: '보통',
       morningTask: '',
-      habits: emptyHabits,
+      habits: { ...emptyHabits },
       mealMemo: '',
       exerciseMemo: '',
       weight: '',
@@ -147,7 +147,7 @@ export default function App() {
         body: JSON.stringify({
           date: form.date,
           condition: form.condition,
-          score: score,
+          score,
           water: form.habits.water,
           fruit: form.habits.fruit,
           exercise: form.habits.exercise,
@@ -189,6 +189,13 @@ export default function App() {
       exerciseMemo: '',
       weight: '',
       note: '',
+    });
+  };
+
+  const loadRecordToForm = (record: RecordItem) => {
+    setForm({
+      ...record,
+      habits: { ...record.habits },
     });
   };
 
@@ -250,6 +257,7 @@ export default function App() {
                 {['좋음', '보통', '나쁨'].map((state) => (
                   <button
                     key={state}
+                    type="button"
                     onClick={() => setForm({ ...form, condition: state })}
                     style={{
                       ...buttonStyle,
@@ -322,6 +330,7 @@ export default function App() {
                 return (
                   <button
                     key={habit.key}
+                    type="button"
                     onClick={() =>
                       setForm({
                         ...form,
@@ -409,12 +418,14 @@ export default function App() {
 
           <div style={{ display: 'flex', gap: '12px' }}>
             <button
+              type="button"
               onClick={saveRecord}
               style={{ ...buttonStyle, background: '#0f172a', color: '#fff' }}
             >
               저장하기
             </button>
             <button
+              type="button"
               onClick={resetToday}
               style={{
                 ...buttonStyle,
@@ -480,7 +491,8 @@ export default function App() {
                 return (
                   <button
                     key={record.date}
-                    onClick={() => selectRecord(record)}
+                    type="button"
+                    onClick={() => loadRecordToForm(record)}
                     style={{
                       padding: '16px',
                       borderRadius: '18px',
@@ -542,7 +554,7 @@ export default function App() {
   );
 }
 
-const inputStyle: React.CSSProperties = {
+const inputStyle: CSSProperties = {
   width: '100%',
   marginTop: '8px',
   padding: '12px 14px',
@@ -551,7 +563,7 @@ const inputStyle: React.CSSProperties = {
   boxSizing: 'border-box',
 };
 
-const textareaStyle: React.CSSProperties = {
+const textareaStyle: CSSProperties = {
   width: '100%',
   minHeight: '120px',
   marginTop: '8px',
@@ -562,27 +574,27 @@ const textareaStyle: React.CSSProperties = {
   resize: 'vertical',
 };
 
-const buttonStyle: React.CSSProperties = {
+const buttonStyle: CSSProperties = {
   padding: '12px 18px',
   borderRadius: '14px',
   cursor: 'pointer',
   fontWeight: 700,
 };
 
-const statBoxStyle: React.CSSProperties = {
+const statBoxStyle: CSSProperties = {
   background: '#fff',
   border: '1px solid #e2e8f0',
   borderRadius: '18px',
   padding: '16px',
 };
 
-const statTitleStyle: React.CSSProperties = {
+const statTitleStyle: CSSProperties = {
   color: '#64748b',
   fontSize: '14px',
   marginBottom: '8px',
 };
 
-const statValueStyle: React.CSSProperties = {
+const statValueStyle: CSSProperties = {
   fontSize: '28px',
   fontWeight: 800,
 };
