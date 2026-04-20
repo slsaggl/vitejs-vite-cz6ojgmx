@@ -253,7 +253,12 @@ export default function App() {
 
             <div>
               <label>몸상태</label>
-              <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+              <div
+  style={{
+    display: 'flex',
+    flexDirection: window.innerWidth < 768 ? 'column' : 'row',
+  }}
+>
                 {['좋음', '보통', '나쁨'].map((state) => (
                   <button
                     key={state}
