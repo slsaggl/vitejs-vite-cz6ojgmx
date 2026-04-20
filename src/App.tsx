@@ -210,14 +210,14 @@ export default function App() {
       }}
     >
       <div
-        style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: '1.2fr 0.8fr',
-          gap: '24px',
-        }}
-      >
+  style={{
+    maxWidth: '1200px',
+    margin: '0 auto',
+    display: 'grid',
+    gridTemplateColumns: window.innerWidth < 768 ? '1fr' : '1.2fr 0.8fr',
+    gap: '24px',
+  }}
+>
         <div
           style={{
             background: '#ffffff',
@@ -253,12 +253,7 @@ export default function App() {
 
             <div>
               <label>몸상태</label>
-              <div
-  style={{
-    display: 'flex',
-    flexDirection: window.innerWidth < 768 ? 'column' : 'row',
-  }}
->
+              <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
                 {['좋음', '보통', '나쁨'].map((state) => (
                   <button
                     key={state}
