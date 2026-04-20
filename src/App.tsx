@@ -36,7 +36,7 @@ const initialData: RecordItem[] = [
     mealMemo: '아침 과일, 점심 일반식, 저녁 가볍게',
     exerciseMemo: '산책 30분',
     weight: '',
-    note: '무난한 하루',
+    note: '무난한 하루!',
   },
   {
     date: '2026-04-19',
